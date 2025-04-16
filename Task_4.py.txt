@@ -1,0 +1,19 @@
+from textblob import TextBlob
+import pandas as pd
+data = ["I love this phone!", 
+        "This is the worst service ever.", 
+        "It’s okay, not great.", 
+        "Amazing experience!", 
+        "I'm disappointed."]
+def get_sentiment(text):
+    blob = TextBlob(text)
+    polarity = blob.sentiment.polarity
+    if polarity > 0:
+        return "Positive"
+    elif polarity < 0:
+        return "Negative"
+    else:
+        return "Neutral"
+df = pd.DataFrame(data, columns=["Text"])
+df["Sentiment"] = df["Text"].apply(get_sentiment)
+print(df)
